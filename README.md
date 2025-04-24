@@ -1,26 +1,33 @@
-# About
+# sixaxispairer
 
-A tool for viewing and setting the bluetooth address
-a sixaxis controller is currently paired with.
+## 準備: ESP32のMACアドレス確認
 
+以下のスケッチをESP32に書き込む。
 
-# Dependencies
+するとシリアルモニタにMACアドレスが表示されるので、メモしておく。
 
-HID API (https://github.com/libusb/hidapi)
+```cpp
+#include <Ps3Controller.h>
 
+void setup() {
+  Serial.begin(115200);
+  Ps3.begin();
+  Serial.println(Ps3.getAddress());
+}
 
-# Supported Platforms
+void loop() {}
+```
 
-* Windows
-* Mac
-* Linux
+## ビルド・実行
 
+事前にUSBでDualShockとPCを接続する。
 
-# Building
+`10:89:10:89:10:89` の部分はメモしておいたMACアドレスを入力する。
 
-    $ mkdir build
-    $ cd build
-    $ cmake ..
-    $ make
-    $ ./bin/sixaxispairer
-    $ ./bin/sixaxispairer xx:xx:xx:xx:xx:xx
+```bash
+sudo apt install libhidapi-dev
+cmake -B build .
+cmake --build build
+sudo build/sixaxispairer 10:89:10:89:10:89
+```
+

@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include <hidapi.h>
+#include <hidapi/hidapi.h>
 
 static const unsigned short VENDOR    = 0x054c;
 static const unsigned short PRODUCT[] = {
